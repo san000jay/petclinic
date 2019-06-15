@@ -10,7 +10,7 @@ pipeline {
                     	   doGenerateSubmoduleConfigurations: false,
                     	   extensions: [],
                      	   submoduleCfg: [],
-                    	   userRemoteConfigs: [[url: 'https://github.com/ganeshhp/Maven-petclinic-project.git']]])
+                    	   userRemoteConfigs: [[url: 'https://github.com/san000jay/petclinic.git']]])
             }
         }
      stage('code-validation') {
