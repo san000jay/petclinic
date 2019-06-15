@@ -20,7 +20,7 @@ def uploadSpec = """{
 		   ]
   }"""
 
-/*def downloadSpec = """{
+def downloadSpec = """{
  "files": [
   {
       "pattern": "petclinic/*.war",
@@ -28,7 +28,7 @@ def uploadSpec = """{
     }
  ]
 }"""
-*/
+
 pipeline {
  agent none
     stages {
