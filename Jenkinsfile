@@ -33,7 +33,7 @@ pipeline {
  agent none
     stages {
       stage('SCM_Chekout') {
-          agent { label "node1" }
+          agent { label "master" }
 			steps {
 			    script {
 					notify('build-started')
@@ -47,14 +47,14 @@ pipeline {
             }
         }
       stage('Build'){
-          agent { label "node1" }
+          agent { label "master" }
 			steps {
                 sh 'mvn -f pom.xml clean package'
             }
         }
 
 	  stage('push-to-artifactory') {
-          agent { label "node1" }
+          agent { label "master" }
 			steps {
                 script {
 				   server.upload(uploadSpec)
@@ -62,14 +62,14 @@ pipeline {
         }
 	}
 	  stage('Deploy') {
-          agent { label "node2" }
+          agent { label "node1" }
 			steps {
 			    script {
 				  input('Deploy Package to Production?')
 				  notify('Deployment-to-Production')
 				}
 					sh 'wget http://35.244.34.109:8081/artifactory/petclinic/petclinic.war'
-					sh 'cp ./Helloworldwebapp.war /opt/tomcat/webapps/'
+					sh 'cp ./petclinic.war /opt/tomcat/webapps/'
 					sh '/opt/tomcat/bin/catalina.sh run'
 
             }
